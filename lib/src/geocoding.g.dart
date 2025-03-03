@@ -10,7 +10,8 @@ GeocodingResponse _$GeocodingResponseFromJson(Map<String, dynamic> json) {
   return GeocodingResponse(
     status: json['status'] as String,
     errorMessage: json['error_message'] as String?,
-    results: (json['results'] as List<dynamic>?)
+    results:
+        (json['results'] as List<dynamic>?)
             ?.map((e) => GeocodingResult.fromJson(e as Map<String, dynamic>))
             .toList() ??
         [],
@@ -30,12 +31,14 @@ GeocodingResult _$GeocodingResultFromJson(Map<String, dynamic> json) {
     placeId: json['place_id'] as String,
     types:
         (json['types'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-            [],
-    addressComponents: (json['address_components'] as List<dynamic>?)
+        [],
+    addressComponents:
+        (json['address_components'] as List<dynamic>?)
             ?.map((e) => AddressComponent.fromJson(e as Map<String, dynamic>))
             .toList() ??
         [],
-    postcodeLocalities: (json['postcode_localities'] as List<dynamic>?)
+    postcodeLocalities:
+        (json['postcode_localities'] as List<dynamic>?)
             ?.map((e) => e as String)
             .toList() ??
         [],
@@ -57,9 +60,10 @@ Map<String, dynamic> _$GeocodingResultToJson(GeocodingResult instance) =>
 
 StreetAddress _$StreetAddressFromJson(Map<String, dynamic> json) {
   return StreetAddress(
-    geometry: json['geometry'] == null
-        ? null
-        : Geometry.fromJson(json['geometry'] as Map<String, dynamic>),
+    geometry:
+        json['geometry'] == null
+            ? null
+            : Geometry.fromJson(json['geometry'] as Map<String, dynamic>),
     addressLine: json['address_line'] as String?,
     countryName: json['country_name'] as String?,
     countryCode: json['country_code'] as String?,

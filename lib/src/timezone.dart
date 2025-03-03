@@ -19,12 +19,12 @@ class GoogleMapsTimezone extends GoogleWebService {
     Client? httpClient,
     Map<String, String>? apiHeaders,
   }) : super(
-          apiKey: apiKey,
-          baseUrl: baseUrl,
-          apiPath: _timezoneUrl,
-          httpClient: httpClient,
-          apiHeaders: apiHeaders,
-        );
+         apiKey: apiKey,
+         baseUrl: baseUrl,
+         apiPath: _timezoneUrl,
+         httpClient: httpClient,
+         apiHeaders: apiHeaders,
+       );
 
   /// Retrieves time zone information for the specified location and the timestamp.
   /// If the language is specified, the time zone name will be localized to that

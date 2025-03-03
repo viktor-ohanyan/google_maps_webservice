@@ -19,12 +19,12 @@ class GoogleMapsGeocoding extends GoogleWebService {
     Client? httpClient,
     Map<String, String>? apiHeaders,
   }) : super(
-          apiKey: apiKey,
-          baseUrl: baseUrl,
-          apiPath: _geocodeUrl,
-          httpClient: httpClient,
-          apiHeaders: apiHeaders,
-        );
+         apiKey: apiKey,
+         baseUrl: baseUrl,
+         apiPath: _geocodeUrl,
+         httpClient: httpClient,
+         apiHeaders: apiHeaders,
+       );
 
   Future<GeocodingResponse> searchByAddress(
     String address, {
@@ -158,10 +158,7 @@ class GeocodingResponse extends GoogleResponseStatus {
     required String status,
     String? errorMessage,
     required this.results,
-  }) : super(
-          status: status,
-          errorMessage: errorMessage,
-        );
+  }) : super(status: status, errorMessage: errorMessage);
 
   factory GeocodingResponse.fromJson(Map<String, dynamic> json) =>
       _$GeocodingResponseFromJson(json);

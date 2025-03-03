@@ -21,11 +21,11 @@ class GoogleMapsGeolocation extends GoogleWebService {
     Client? httpClient,
     Map<String, String>? apiHeaders,
   }) : super(
-          apiKey: apiKey,
-          baseUrl: baseUrl ?? _baseUrl,
-          apiPath: _geolocationUrl,
-          httpClient: httpClient,
-        );
+         apiKey: apiKey,
+         baseUrl: baseUrl ?? _baseUrl,
+         apiPath: _geolocationUrl,
+         httpClient: httpClient,
+       );
 
   Future<GeolocationResponse> getGeolocation({
     int? homeMobileCountryCode,
@@ -164,11 +164,7 @@ class GeolocationResponse {
   final num? accuracy;
   final GeolocationErrorResponse? error;
 
-  GeolocationResponse({
-    this.location,
-    this.accuracy,
-    this.error,
-  });
+  GeolocationResponse({this.location, this.accuracy, this.error});
 
   bool get isOkay => error == null;
 
@@ -219,10 +215,7 @@ class WifiAccessPoint extends _AccessObject {
     this.macAddress,
     this.channel,
     this.signalToNoiseRatio,
-  }) : super(
-          age: age,
-          signalStrength: signalStrength,
-        );
+  }) : super(age: age, signalStrength: signalStrength);
 
   factory WifiAccessPoint.fromJson(Map<String, dynamic> json) =>
       _$WifiAccessPointFromJson(json);

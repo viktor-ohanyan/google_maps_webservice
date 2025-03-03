@@ -7,10 +7,7 @@ class Location {
   final double lat;
   final double lng;
 
-  Location({
-    required this.lat,
-    required this.lng,
-  });
+  Location({required this.lat, required this.lng});
 
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);
@@ -48,10 +45,7 @@ class Bounds {
   final Location northeast;
   final Location southwest;
 
-  Bounds({
-    required this.northeast,
-    required this.southwest,
-  });
+  Bounds({required this.northeast, required this.southwest});
 
   @override
   String toString() =>
@@ -94,14 +88,14 @@ abstract class GoogleResponseList<T> extends GoogleResponseStatus {
   final List<T> results;
 
   GoogleResponseList(String status, String? errorMessage, this.results)
-      : super(status: status, errorMessage: errorMessage);
+    : super(status: status, errorMessage: errorMessage);
 }
 
 abstract class GoogleResponse<T> extends GoogleResponseStatus {
   final T result;
 
   GoogleResponse(String status, String? errorMessage, this.result)
-      : super(status: status, errorMessage: errorMessage);
+    : super(status: status, errorMessage: errorMessage);
 }
 
 @JsonSerializable()
@@ -175,12 +169,7 @@ extension TravelModeExt on TravelMode {
   }
 }
 
-enum RouteType {
-  tolls,
-  highways,
-  ferries,
-  indoor,
-}
+enum RouteType { tolls, highways, ferries, indoor }
 
 @JsonSerializable()
 class _RouteType {
@@ -204,10 +193,7 @@ extension RouteTypeExt on RouteType {
   }
 }
 
-enum Unit {
-  metric,
-  imperial,
-}
+enum Unit { metric, imperial }
 
 @JsonSerializable()
 class _Unit {
@@ -259,13 +245,7 @@ extension TrafficModelExt on TrafficModel {
   }
 }
 
-enum TransitMode {
-  bus,
-  subway,
-  train,
-  tram,
-  rail,
-}
+enum TransitMode { bus, subway, train, tram, rail }
 
 @JsonSerializable()
 class _TransitMode {

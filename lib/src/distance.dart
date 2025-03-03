@@ -19,16 +19,16 @@ class GoogleDistanceMatrix extends GoogleWebService {
     Client? httpClient,
     Map<String, String>? apiHeaders,
   }) : super(
-          apiKey: apiKey,
-          baseUrl: baseUrl,
-          apiPath: _distanceUrl,
-          httpClient: httpClient,
-          apiHeaders: apiHeaders,
-        );
+         apiKey: apiKey,
+         baseUrl: baseUrl,
+         apiPath: _distanceUrl,
+         httpClient: httpClient,
+         apiHeaders: apiHeaders,
+       );
 
   Future<DistanceResponse> _distance(
-    List<Object /*Location|String*/ > origin,
-    List<Object /*Location|String*/ > destination, {
+    List<Object /*Location|String*/> origin,
+    List<Object /*Location|String*/> destination, {
     TravelMode? travelMode,
     String? languageCode,
     bool alternative = false,
@@ -77,10 +77,7 @@ class GoogleDistanceMatrix extends GoogleWebService {
     TransitRoutingPreferences? transitRoutingPreference,
   }) {
     if (avoid != null) {
-      avoids = [
-        ...avoids,
-        avoid,
-      ];
+      avoids = [...avoids, avoid];
     }
 
     return _distance(
@@ -117,10 +114,7 @@ class GoogleDistanceMatrix extends GoogleWebService {
     TransitRoutingPreferences? transitRoutingPreference,
   }) async {
     if (avoid != null) {
-      avoids = [
-        ...avoids,
-        avoid,
-      ];
+      avoids = [...avoids, avoid];
     }
 
     return _distance(
@@ -141,8 +135,8 @@ class GoogleDistanceMatrix extends GoogleWebService {
   }
 
   String buildUrl({
-    required List<Object /*Location|String*/ > origin,
-    required List<Object /*Location|String*/ > destination,
+    required List<Object /*Location|String*/> origin,
+    required List<Object /*Location|String*/> destination,
     TravelMode? travelMode,
     String? languageCode,
     bool alternative = false,
@@ -187,12 +181,14 @@ class GoogleDistanceMatrix extends GoogleWebService {
           departureTime is! num &&
           departureTime != 'now') {
         throw ArgumentError(
-            "'departureTime' must be a '$num' or a '$DateTime'");
+          "'departureTime' must be a '$num' or a '$DateTime'",
+        );
       }
 
-      params['departure_time'] = departureTime is DateTime
-          ? (departureTime.millisecondsSinceEpoch ~/ 1000).toString()
-          : departureTime.toString();
+      params['departure_time'] =
+          departureTime is DateTime
+              ? (departureTime.millisecondsSinceEpoch ~/ 1000).toString()
+              : departureTime.toString();
     }
 
     if (arrivalTime != null) {
@@ -200,9 +196,10 @@ class GoogleDistanceMatrix extends GoogleWebService {
         throw ArgumentError("'arrivalTime' must be a '$num' or a '$DateTime'");
       }
 
-      params['arrival_time'] = arrivalTime is DateTime
-          ? (arrivalTime.millisecondsSinceEpoch ~/ 1000).toString()
-          : arrivalTime.toString();
+      params['arrival_time'] =
+          arrivalTime is DateTime
+              ? (arrivalTime.millisecondsSinceEpoch ~/ 1000).toString()
+              : arrivalTime.toString();
     }
 
     if (travelMode != null) {
@@ -234,8 +231,9 @@ class GoogleDistanceMatrix extends GoogleWebService {
     }
 
     if (transitMode.isNotEmpty) {
-      params['transit_mode'] =
-          transitMode.map((t) => t.toApiString()).join('|');
+      params['transit_mode'] = transitMode
+          .map((t) => t.toApiString())
+          .join('|');
     }
 
     if (transitRoutingPreference != null) {
@@ -280,10 +278,7 @@ class DistanceResponse extends GoogleResponseStatus {
     required this.originAddresses,
     required this.destinationAddresses,
     required this.rows,
-  }) : super(
-          status: status,
-          errorMessage: errorMessage,
-        );
+  }) : super(status: status, errorMessage: errorMessage);
 
   factory DistanceResponse.fromJson(Map<String, dynamic> json) =>
       _$DistanceResponseFromJson(json);
@@ -307,11 +302,7 @@ class Element {
   final Value duration;
   final String? elementStatus;
 
-  Element({
-    required this.distance,
-    required this.duration,
-    this.elementStatus,
-  });
+  Element({required this.distance, required this.duration, this.elementStatus});
 
   factory Element.fromJson(Map<String, dynamic> json) =>
       _$ElementFromJson(json);

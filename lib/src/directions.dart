@@ -19,12 +19,12 @@ class GoogleMapsDirections extends GoogleWebService {
     Client? httpClient,
     Map<String, String>? apiHeaders,
   }) : super(
-          apiKey: apiKey,
-          baseUrl: baseUrl,
-          apiPath: _directionsUrl,
-          httpClient: httpClient,
-          apiHeaders: apiHeaders,
-        );
+         apiKey: apiKey,
+         baseUrl: baseUrl,
+         apiPath: _directionsUrl,
+         httpClient: httpClient,
+         apiHeaders: apiHeaders,
+       );
 
   Future<DirectionsResponse> directions(
     Object /*Location|String*/ origin,
@@ -166,12 +166,14 @@ class GoogleMapsDirections extends GoogleWebService {
           departureTime is! num &&
           departureTime != 'now') {
         throw ArgumentError(
-            "'departureTime' must be a '$num' or a '$DateTime'");
+          "'departureTime' must be a '$num' or a '$DateTime'",
+        );
       }
 
-      params['departure_time'] = departureTime is DateTime
-          ? (departureTime.millisecondsSinceEpoch ~/ 1000).toString()
-          : departureTime.toString();
+      params['departure_time'] =
+          departureTime is DateTime
+              ? (departureTime.millisecondsSinceEpoch ~/ 1000).toString()
+              : departureTime.toString();
     }
 
     if (arrivalTime != null) {
@@ -179,9 +181,10 @@ class GoogleMapsDirections extends GoogleWebService {
         throw ArgumentError("'arrivalTime' must be a '$num' or a '$DateTime'");
       }
 
-      params['arrival_time'] = arrivalTime is DateTime
-          ? (arrivalTime.millisecondsSinceEpoch ~/ 1000).toString()
-          : arrivalTime.toString();
+      params['arrival_time'] =
+          arrivalTime is DateTime
+              ? (arrivalTime.millisecondsSinceEpoch ~/ 1000).toString()
+              : arrivalTime.toString();
     }
 
     if (waypoints.isNotEmpty == true) {
@@ -203,10 +206,7 @@ class GoogleMapsDirections extends GoogleWebService {
     }
 
     if (avoid != null) {
-      avoids = [
-        ...avoids,
-        avoid,
-      ];
+      avoids = [...avoids, avoid];
     }
 
     if (avoids.isNotEmpty) {
@@ -230,8 +230,9 @@ class GoogleMapsDirections extends GoogleWebService {
     }
 
     if (transitMode.isNotEmpty) {
-      params['transit_mode'] =
-          transitMode.map((t) => t.toApiString()).join('|');
+      params['transit_mode'] = transitMode
+          .map((t) => t.toApiString())
+          .join('|');
     }
 
     if (transitRoutingPreference != null) {
@@ -413,11 +414,11 @@ class Leg extends _Step {
     required Value duration,
     required Value distance,
   }) : super(
-          startLocation: startLocation,
-          endLocation: endLocation,
-          duration: duration,
-          distance: distance,
-        );
+         startLocation: startLocation,
+         endLocation: endLocation,
+         duration: duration,
+         distance: distance,
+       );
 
   factory Leg.fromJson(Map<String, dynamic> json) => _$LegFromJson(json);
   Map<String, dynamic> toJson() => _$LegToJson(this);
@@ -447,11 +448,11 @@ class Step extends _Step {
     this.transitDetails,
     this.maneuver,
   }) : super(
-          startLocation: startLocation,
-          endLocation: endLocation,
-          duration: duration,
-          distance: distance,
-        );
+         startLocation: startLocation,
+         endLocation: endLocation,
+         duration: duration,
+         distance: distance,
+       );
 
   factory Step.fromJson(Map<String, dynamic> json) => _$StepFromJson(json);
   Map<String, dynamic> toJson() => _$StepToJson(this);
@@ -484,7 +485,7 @@ class Fare extends Value {
   final String currency;
 
   Fare({required this.currency, required num value, required String text})
-      : super(value: value, text: text);
+    : super(value: value, text: text);
 
   factory Fare.fromJson(Map<String, dynamic> json) => _$FareFromJson(json);
   @override
@@ -497,7 +498,7 @@ class Time extends Value {
   final String timeZone;
 
   Time({required this.timeZone, required num value, required String text})
-      : super(value: value, text: text);
+    : super(value: value, text: text);
 
   factory Time.fromJson(Map<String, dynamic> json) => _$TimeFromJson(json);
   @override
@@ -592,11 +593,7 @@ class TransitAgency {
   final String url;
   final String phone;
 
-  TransitAgency({
-    required this.name,
-    required this.url,
-    required this.phone,
-  });
+  TransitAgency({required this.name, required this.url, required this.phone});
 
   factory TransitAgency.fromJson(Map<String, dynamic> json) =>
       _$TransitAgencyFromJson(json);
